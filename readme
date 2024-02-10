@@ -1,0 +1,14 @@
+This project uses AWS services for data processing and training a machine learning model using the Titanic dataset.
+
+Project Steps
+
+Creation of an IAM user.
+Creation of an S3 bucket for data.
+Setting up a Lambda function for data processing.
+Use of SageMaker to train an XGBoost model.
+Predictions and accuracy calculation.
+Monitoring via CloudWatch.
+
+Usage
+
+You will need an AWS account and the Titanic dataset to use this project.
