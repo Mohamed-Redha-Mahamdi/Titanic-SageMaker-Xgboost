@@ -1,14 +1,53 @@
-This project uses AWS services for data processing and training a machine learning model using the Titanic dataset.
+# Project: Titanic Survival Prediction with AWS Lambda and SageMaker
 
-Project Steps
+## Overview
 
-Creation of an IAM user.
-Creation of an S3 bucket for data.
-Setting up a Lambda function for data processing.
-Use of SageMaker to train an XGBoost model.
-Predictions and accuracy calculation.
-Monitoring via CloudWatch.
+This project involves the development and deployment of a machine learning model to predict the survival of passengers on the Titanic. The project is composed of two main components:
 
-Usage
+1. `Lambda function.py`: A Python script designed to run as an AWS Lambda function. This script preprocesses the Titanic dataset stored in an AWS S3 bucket and prepares it for model training.
 
-You will need an AWS account and the Titanic dataset to use this project.
+2. `XGboost_SageMaker_Titanic.ipynb`: A Jupyter notebook that utilizes Amazon SageMaker to train an XGBoost model on the preprocessed data. The notebook also demonstrates how to deploy the trained model to a SageMaker endpoint for real-time predictions.
+
+## Lambda Function (`Lambda function.py`)
+
+The Lambda function script is responsible for the initial data processing steps. It performs the following tasks:
+
+- Downloads the Titanic dataset from an S3 bucket.
+- Preprocesses the data by handling missing values, encoding categorical variables, and dropping unnecessary columns.
+- Saves the processed data back to the S3 bucket for further use in model training.
+
+## SageMaker Notebook (`XGboost_SageMaker_Titanic.ipynb`)
+
+The SageMaker notebook contains the steps for model training and deployment:
+
+- Installs necessary Python packages for data manipulation and machine learning.
+- Loads the preprocessed data from the S3 bucket into a pandas DataFrame.
+- Splits the data into training and test sets.
+- Converts the data into the libsvm format and uploads it to S3.
+- Sets up and trains an XGBoost model using SageMaker's Estimator API.
+- Deploys the trained model to a SageMaker endpoint.
+- Makes predictions on the test set and calculates the accuracy of the model.
+- Performs data consistency checks.
+- Deletes the endpoint after use to manage costs.
+
+## Usage
+
+To use this project, follow these steps:
+
+1. Deploy the `Lambda function.py` script to AWS Lambda. Ensure that the Lambda function has the necessary permissions to access the S3 bucket containing the Titanic dataset.
+
+2. Open the `XGboost_SageMaker_Titanic.ipynb` notebook in an Amazon SageMaker notebook instance. Run the cells in order to train the model and deploy it to an endpoint.
+
+3. Use the deployed model to make predictions on new data by sending HTTP requests to the SageMaker endpoint.
+
+4. Once you are done with the predictions, remember to delete the SageMaker endpoint to avoid incurring unnecessary charges.
+
+## Requirements
+
+- An AWS account with access to Lambda, S3, and SageMaker services.
+- Proper IAM roles with the necessary permissions for Lambda and SageMaker to access S3 resources.
+- The Titanic dataset stored in an S3 bucket.
+
+## Conclusion
+
+This project showcases the power of AWS services for machine learning tasks. By combining AWS Lambda for data preprocessing and Amazon SageMaker for model training and deployment, we can create a robust workflow for predicting outcomes based on historical data.
